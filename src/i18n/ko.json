@@ -11,7 +11,7 @@
     "timeout": "위치 확인이 지연됩니다. 서울시청 기준으로 표시합니다."
   },
   "nearest": {
-    "title": "가장 가까움",
+    "badge": "최단",
     "startNavi": "안내 시작",
     "call": "전화",
     "empty": "주변에 등록된 화장실이 없습니다.",
@@ -23,7 +23,8 @@
     "missing": "화장실 데이터가 없습니다. 터미널에서 `npm run tiles`를 실행하세요."
   },
   "safety": {
-    "notice": "운전 중에는 정차 후 조작하세요."
+    "notice": "운전 중에는 정차 후 조작하세요.",
+    "dataUpdated": "지도업데이트"
   },
   "detail": {
     "openHours": "개방시간",

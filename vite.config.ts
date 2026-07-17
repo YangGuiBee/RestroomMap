@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.svg", "icons/icon-192.png", "icons/icon-512.png"],
+      includeAssets: ["favicon.png", "icons/icon-192.png", "icons/icon-512.png"],
       manifest: {
         name: "화장실맵",
         short_name: "화장실맵",

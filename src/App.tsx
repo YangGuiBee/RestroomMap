@@ -6,6 +6,7 @@ import { useKakaoLoader } from "./hooks/useKakaoLoader";
 import { useGeolocation } from "./hooks/useGeolocation";
 import { useNearbyRestrooms } from "./hooks/useNearbyRestrooms";
 import t from "./i18n/ko.json";
+import dataMeta from "./data-meta.json";
 
 const MAX_MARKERS = 20; // 지도에 표시할 최대 마커 (가까운 순)
 const MAX_CARDS = 3; // 하단 카드 (가장 가까운 3곳)
@@ -39,7 +40,10 @@ export default function App() {
   return (
     <div className="app">
       <header className="top-bar">
-        <span className="app-title">{t.app.name}</span>
+        <span className="app-title">
+          <img src="/logo.png" alt="" className="app-logo" />
+          {t.app.name}
+        </span>
         <button className="my-loc-btn" onClick={geo.refresh} aria-label={t.location.myLocation}>
           ◎ {t.location.myLocation}
         </button>
@@ -87,7 +91,9 @@ export default function App() {
             origin={origin}
           />
         )}
-        <div className="safety-bar">{t.safety.notice}</div>
+        <div className="safety-bar">
+          {t.safety.notice} ({t.safety.dataUpdated}: {dataMeta.updatedAt})
+        </div>
       </footer>
 
       <DetailSheet restroom={selected} origin={origin} onClose={() => setSelectedId(null)} />

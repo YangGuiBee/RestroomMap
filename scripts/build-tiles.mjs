@@ -158,6 +158,14 @@ fs.writeFileSync(
   JSON.stringify({ precision: GEOHASH_PRECISION, total: written, tiles: index })
 );
 
+// 타일 생성 시각(앱 하단 "지도업데이트" 표시용) — 빌드 시점에 번들되도록 src/에 기록
+const today = new Date();
+const updatedAt = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, "0")}.${String(today.getDate()).padStart(2, "0")}`;
+fs.writeFileSync(
+  path.join(ROOT, "src", "data-meta.json"),
+  JSON.stringify({ updatedAt })
+);
+
 // 5) 리포트
 const counts = Object.values(index);
 console.log("\n=== 타일 생성 리포트 ===");

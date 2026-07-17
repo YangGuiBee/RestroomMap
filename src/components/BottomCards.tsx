@@ -22,11 +22,12 @@ export default function BottomCards({ items, selectedId, onSelect, origin }: Pro
           className={`card${i === 0 ? " nearest" : ""}${selectedId === r.id ? " selected" : ""}`}
           onClick={() => onSelect(r.id)}
         >
-          {i === 0 && <span className="badge">{t.nearest.title}</span>}
-          <div className="card-name">{r.name}</div>
+          <div className="card-name">
+            {i === 0 && <span className="badge-dot">{t.nearest.badge}</span>}
+            <span className="card-name-text">{r.name}</span>
+          </div>
           <div className="card-meta">
             <span className="dist">{formatDistance(r.distance)}</span>
-            {r.openHours && <span className="hours">{r.openHours}</span>}
           </div>
           <button
             className="navi-btn"
