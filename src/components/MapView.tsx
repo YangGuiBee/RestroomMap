@@ -122,7 +122,9 @@ export default function MapView({
     // 화면 픽셀상 완전히 겹쳐 서로 가릴 수 있다. 위경도 오프셋만으로는 줌 레벨마다
     // 필요한 오프셋 크기가 달라 안전하지 않으므로, 실제 화면 픽셀 좌표(Projection) 기준으로
     // 이미 배치된 마커와 너무 가까우면 골든 앵글로 밀어내는 방식으로 배치한다.
-    const MIN_PIXEL_GAP = 26;
+    // 핀 자체가 28px이라 간격을 핀 크기보다 확실히 크게 잡아야 브라우저 확대율/모니터
+    // 배율(125%, 150% 등) 차이로 인한 서브픽셀 오차에도 안전하게 안 겹친다.
+    const MIN_PIXEL_GAP = 36;
     const MAX_RING = 6;
     const projection = map.getProjection();
     const placed: kakao.maps.Point[] = [];
