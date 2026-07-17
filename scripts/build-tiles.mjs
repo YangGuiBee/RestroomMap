@@ -122,7 +122,8 @@ for (const r of rows.slice(1)) {
     lng: Math.round(c.lng * 1e6) / 1e6,
     roadAddr: clean(r[IX.road]),
     jibunAddr: clean(r[IX.jibun]),
-    openHours: clean(r[IX.open]) || clean(r[IX.openDetail]),
+    // 상세시간("(평일)09:00~18:00" 등 요일 정보 포함)을 우선 표시. 없을 때만 "정시/상시" 같은 분류값으로 폴백
+    openHours: clean(r[IX.openDetail]) || clean(r[IX.open]),
     maleToilets: num(r[IX.mBig]) + num(r[IX.mSmall]),
     femaleToilets: num(r[IX.fBig]),
     disabled,

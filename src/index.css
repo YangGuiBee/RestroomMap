@@ -457,6 +457,12 @@ code {
 .navi-btn:active {
   background: var(--brand-dark);
 }
+.navi-btn.unavailable {
+  background: var(--danger);
+}
+.navi-btn.unavailable:active {
+  background: #8e1c1c;
+}
 
 /* 상세 바텀시트 */
 .sheet-overlay {
@@ -547,6 +553,24 @@ code {
   color: var(--text);
 }
 
+.avail-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 8px;
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 8px;
+  vertical-align: middle;
+}
+.avail-tag.open {
+  color: #1b5e20;
+  background: #c8e6c9;
+}
+.avail-tag.closed {
+  color: #fff;
+  background: var(--danger);
+}
+
 .sheet-actions {
   display: flex;
   gap: 10px;
@@ -580,6 +604,12 @@ code {
 }
 .sheet-navi-btn:active {
   background: var(--brand-dark);
+}
+.sheet-navi-btn.unavailable {
+  background: var(--danger);
+}
+.sheet-navi-btn.unavailable:active {
+  background: #8e1c1c;
 }
 
 /* 하단 안전 안내 */

@@ -20,6 +20,12 @@ declare global {
       setLevel(level: number): void;
       getLevel(): number;
       panTo(latlng: LatLng): void;
+      setBounds(bounds: LatLngBounds): void;
+    }
+
+    class LatLngBounds {
+      constructor();
+      extend(latlng: LatLng): void;
     }
 
     class Marker {

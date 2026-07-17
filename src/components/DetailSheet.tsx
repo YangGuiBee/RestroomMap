@@ -1,6 +1,7 @@
 import type { Coords, RestroomWithDistance } from "../types";
 import { formatDistance } from "../lib/geo";
 import { startNavi } from "../lib/navi";
+import { getAvailability } from "../lib/openHours";
 import t from "../i18n/ko.json";
 
 interface Props {
@@ -19,6 +20,8 @@ function yn(v: boolean | undefined): string {
 export default function DetailSheet({ restroom, origin, onClose }: Props) {
   if (!restroom) return null;
   const r = restroom;
+  const availability = getAvailability(r.openHours);
+  const closed = availability === "closed";
   return (
     <div className="sheet-overlay" onClick={onClose}>
       <div
@@ -41,7 +44,14 @@ export default function DetailSheet({ restroom, origin, onClose }: Props) {
         <div className="sheet-grid">
           <div className="sheet-item">
             <span className="label">{t.detail.openHours}</span>
-            <span className="value">{r.openHours ?? t.detail.none}</span>
+            <span className="value">
+              {r.openHours ?? t.detail.none}
+              {availability !== "unknown" && (
+                <span className={`avail-tag${closed ? " closed" : " open"}`}>
+                  {closed ? t.nearest.unavailable : t.detail.availableNow}
+                </span>
+              )}
+            </span>
           </div>
           <div className="sheet-item">
             <span className="label">{t.detail.male}</span>
@@ -83,8 +93,11 @@ export default function DetailSheet({ restroom, origin, onClose }: Props) {
               {t.nearest.call}
             </a>
           )}
-          <button className="sheet-navi-btn" onClick={() => startNavi(r, origin ?? undefined)}>
-            {t.nearest.startNavi}
+          <button
+            className={`sheet-navi-btn${closed ? " unavailable" : ""}`}
+            onClick={() => startNavi(r, origin ?? undefined)}
+          >
+            {closed ? t.nearest.unavailable : t.nearest.startNavi}
           </button>
         </div>
       </div>

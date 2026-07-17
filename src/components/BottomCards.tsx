@@ -1,6 +1,7 @@
 import type { Coords, RestroomWithDistance } from "../types";
 import { formatDistance } from "../lib/geo";
 import { startNavi } from "../lib/navi";
+import { getAvailability } from "../lib/openHours";
 import t from "../i18n/ko.json";
 
 interface Props {
@@ -39,6 +40,7 @@ export default function BottomCards({
       <div className="cards" role="list">
         {items.map((r, i) => {
           const rank = rankOffset + i + 1;
+          const closed = getAvailability(r.openHours) === "closed";
           return (
             <div
               key={r.id}
@@ -54,13 +56,13 @@ export default function BottomCards({
                 <span className="dist">{formatDistance(r.distance)}</span>
               </div>
               <button
-                className="navi-btn"
+                className={`navi-btn${closed ? " unavailable" : ""}`}
                 onClick={(e) => {
                   e.stopPropagation();
                   startNavi(r, origin ?? undefined);
                 }}
               >
-                {t.nearest.startNavi}
+                {closed ? t.nearest.unavailable : t.nearest.startNavi}
               </button>
             </div>
           );

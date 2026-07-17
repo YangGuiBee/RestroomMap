@@ -25,7 +25,8 @@
     "meters": "m",
     "kilometers": "km",
     "prevPage": "이전 화장실 3곳",
-    "nextPage": "다음 화장실 3곳"
+    "nextPage": "다음 화장실 3곳",
+    "unavailable": "이용불가"
   },
   "data": {
     "loading": "주변 화장실 불러오는 중…",
@@ -49,6 +50,7 @@
     "none": "정보없음",
     "unit": "개",
     "yes": "있음",
-    "no": "없음"
+    "no": "없음",
+    "availableNow": "지금 이용가능"
   }
 }
