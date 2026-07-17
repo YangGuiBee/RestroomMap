@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import type { Coords, RestroomWithDistance } from "../types";
 
+const MAX_AUTO_LEVEL = 6; // 자동 맞춤 시 이보다 더 축소되지 않도록 하는 상한 (숫자가 클수록 축소)
+
 interface Props {
   center: Coords;
   myLocation: Coords | null;
@@ -56,6 +58,10 @@ export default function MapView({
     bounds.extend(new window.kakao.maps.LatLng(center.lat, center.lng));
     restrooms.forEach((r) => bounds.extend(new window.kakao.maps.LatLng(r.lat, r.lng)));
     map.setBounds(bounds);
+    // 마커가 멀리까지 퍼져있으면 setBounds가 너무 축소해버려서, 정작 가까운(카드에 뜨는)
+    // 마커들끼리 화면 픽셀상 겹쳐 서로 가리는 역효과가 난다. "20개 전부 보이기"보다
+    // "가까운 곳들이 겹치지 않고 구분되는 것"이 이 앱 목적에 맞으므로 축소 정도에 상한을 둔다.
+    if (map.getLevel() > MAX_AUTO_LEVEL) map.setLevel(MAX_AUTO_LEVEL);
   }, [center.lat, center.lng, selectedId, restrooms]);
 
   // 내 위치 파란 점
