@@ -33,7 +33,11 @@ export default function BottomCards({
   return (
     <div className="cards-wrap">
       {hasPrev && (
-        <button className="cards-nav cards-nav-prev" onClick={onPrev} aria-label={t.nearest.prevPage}>
+        <button
+          className="cards-nav cards-nav-prev"
+          onClick={onPrev}
+          aria-label={`${t.nearest.prevPage} ${items.length}${t.nearest.countSuffix}`}
+        >
           ‹‹
         </button>
       )}
@@ -69,7 +73,11 @@ export default function BottomCards({
         })}
       </div>
       {hasNext && (
-        <button className="cards-nav cards-nav-next" onClick={onNext} aria-label={t.nearest.nextPage}>
+        <button
+          className="cards-nav cards-nav-next"
+          onClick={onNext}
+          aria-label={`${t.nearest.nextPage} ${items.length}${t.nearest.countSuffix}`}
+        >
           ››
         </button>
       )}

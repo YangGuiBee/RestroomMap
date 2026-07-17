@@ -24,8 +24,9 @@
     "empty": "주변에 등록된 화장실이 없습니다.",
     "meters": "m",
     "kilometers": "km",
-    "prevPage": "이전 화장실 3곳",
-    "nextPage": "다음 화장실 3곳",
+    "prevPage": "이전 화장실",
+    "nextPage": "다음 화장실",
+    "countSuffix": "곳",
     "unavailable": "이용불가"
   },
   "data": {

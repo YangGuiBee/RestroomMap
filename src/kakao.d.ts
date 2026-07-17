@@ -21,6 +21,12 @@ declare global {
       getLevel(): number;
       panTo(latlng: LatLng): void;
       setBounds(bounds: LatLngBounds): void;
+      getProjection(): Projection;
+    }
+
+    interface Projection {
+      pointFromCoords(latlng: LatLng): Point;
+      coordsFromPoint(point: Point): LatLng;
     }
 
     class LatLngBounds {
@@ -50,6 +56,8 @@ declare global {
 
     class Point {
       constructor(x: number, y: number);
+      x: number;
+      y: number;
     }
 
     class CustomOverlay {

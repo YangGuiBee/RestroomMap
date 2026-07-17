@@ -6,16 +6,20 @@ import LocationSearch from "./components/LocationSearch";
 import { useKakaoLoader } from "./hooks/useKakaoLoader";
 import { useGeolocation } from "./hooks/useGeolocation";
 import { useNearbyRestrooms } from "./hooks/useNearbyRestrooms";
+import { useIsDesktop } from "./hooks/useIsDesktop";
 import type { Coords } from "./types";
 import t from "./i18n/ko.json";
 import dataMeta from "./data-meta.json";
 
 const MAX_MARKERS = 10; // 지도에 표시할 최대 마커 (가까운 순)
-const MAX_CARDS = 3; // 하단 카드 (가장 가까운 3곳)
+const MAX_CARDS_MOBILE = 3; // 하단 카드 — 모바일은 한 화면에 3개가 적당
+const MAX_CARDS_DESKTOP = 6; // 데스크톱은 화면이 넓어 6개까지
 
 export default function App() {
   const sdk = useKakaoLoader();
   const geo = useGeolocation();
+  const isDesktop = useIsDesktop();
+  const MAX_CARDS = isDesktop ? MAX_CARDS_DESKTOP : MAX_CARDS_MOBILE;
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [cardPage, setCardPage] = useState(0);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -28,10 +32,11 @@ export default function App() {
     !searchActive && geo.loading ? null : effectiveCoords
   );
 
-  // 위치가 바뀌어 목록이 새로 갱신되면 카드 페이지도 처음으로 되돌림
+  // 위치가 바뀌어 목록이 새로 갱신되거나, 화면 크기 전환으로 카드 개수가 바뀌면
+  // 카드 페이지를 처음으로 되돌림 (엉뚱한 페이지에 머무는 것 방지)
   useEffect(() => {
     setCardPage(0);
-  }, [list]);
+  }, [list, MAX_CARDS]);
 
   // 특정위치 검색: 결과 선택 시 검색 중심으로 전환, "내 위치"는 GPS로 복귀
   const handleSelectLocation = (coords: Coords, label: string) => {

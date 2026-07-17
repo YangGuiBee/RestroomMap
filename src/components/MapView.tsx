@@ -114,22 +114,44 @@ export default function MapView({
     if (!map) return;
     markersRef.current.forEach((m) => m.setMap(null));
     markersRef.current = [];
-    // 같은 건물/복합시설 안의 화장실은 지오코딩 좌표가 완전히 동일할 수 있다.
-    // 그대로 두면 나중에 그려진 마커가 앞의 마커를 완전히 가려버리므로,
-    // 같은 좌표를 공유하는 항목은 골든 앵글로 살짝 벌려 겹치지 않게 배치한다.
-    const coordSeen = new Map<string, number>();
-    restrooms.forEach((r, i) => {
-      const key = `${r.lat},${r.lng}`;
-      const dupIndex = coordSeen.get(key) ?? 0;
-      coordSeen.set(key, dupIndex + 1);
+    // 지리적으로 가까운 화장실(같은 건물 안 복수 시설 등)은 줌 레벨에 따라
+    // 화면 픽셀상 완전히 겹쳐 서로 가릴 수 있다. 위경도 오프셋만으로는 줌 레벨마다
+    // 필요한 오프셋 크기가 달라 안전하지 않으므로, 실제 화면 픽셀 좌표(Projection) 기준으로
+    // 이미 배치된 마커와 너무 가까우면 골든 앵글로 밀어내는 방식으로 배치한다.
+    const MIN_PIXEL_GAP = 26;
+    const MAX_RING = 6;
+    const projection = map.getProjection();
+    const placed: kakao.maps.Point[] = [];
+    const tooClose = (a: kakao.maps.Point, b: kakao.maps.Point) =>
+      Math.hypot(a.x - b.x, a.y - b.y) < MIN_PIXEL_GAP;
 
-      let { lat, lng } = r;
-      if (dupIndex > 0) {
-        const angle = dupIndex * 137.5 * (Math.PI / 180); // 골든 앵글 — 겹침 없이 고르게 분산
-        const offsetMeters = 6 * Math.ceil(dupIndex / 6); // 겹치는 개수가 많아지면 반경도 확대
-        lat += (offsetMeters * Math.cos(angle)) / 111320;
-        lng += (offsetMeters * Math.sin(angle)) / (111320 * Math.cos((lat * Math.PI) / 180));
+    restrooms.forEach((r, i) => {
+      const origin = projection.pointFromCoords(new window.kakao.maps.LatLng(r.lat, r.lng));
+      let point = origin;
+      // 링(반경) 단위로 점점 넓혀가며, 각 링마다 더 많은 각도를 촘촘히 시도한다.
+      // 4곳 이상이 한곳에 몰려있어도(예: 같은 건물의 여러 출입구) 빈 자리를 찾을 때까지 계속한다.
+      if (placed.some((p) => tooClose(p, point))) {
+        outer: for (let ring = 1; ring <= MAX_RING; ring++) {
+          const steps = 6 * ring;
+          const radius = MIN_PIXEL_GAP * ring;
+          for (let k = 0; k < steps; k++) {
+            const angle = (2 * Math.PI * k) / steps;
+            const candidate = new window.kakao.maps.Point(
+              origin.x + radius * Math.cos(angle),
+              origin.y + radius * Math.sin(angle)
+            );
+            if (!placed.some((p) => tooClose(p, candidate))) {
+              point = candidate;
+              break outer;
+            }
+          }
+        }
       }
+      placed.push(point);
+      const latlng =
+        point === origin
+          ? new window.kakao.maps.LatLng(r.lat, r.lng)
+          : projection.coordsFromPoint(point);
 
       const pin = document.createElement("div");
       pin.className = "toilet-pin" + (r.id === selectedId ? " selected" : "");
@@ -139,7 +161,7 @@ export default function MapView({
       num.textContent = String(i + 1); // 내 위치 기준 가까운 순 (1이 가장 가까움)
       pin.appendChild(num);
       const ov = new window.kakao.maps.CustomOverlay({
-        position: new window.kakao.maps.LatLng(lat, lng),
+        position: latlng,
         content: pin,
         yAnchor: 1,
         zIndex: r.id === selectedId ? 9 : 5,
