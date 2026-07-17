@@ -54,22 +54,27 @@ export default function MapView({
 
   // 주변 화장실 마커 (선택 시 강조)
   useEffect(() => {
-    if (!mapRef.current) return;
+    const map = mapRef.current;
+    if (!map) return;
     markersRef.current.forEach((m) => m.setMap(null));
     markersRef.current = [];
-    for (const r of restrooms) {
+    restrooms.forEach((r, i) => {
       const pin = document.createElement("div");
       pin.className = "toilet-pin" + (r.id === selectedId ? " selected" : "");
       pin.onclick = () => onSelectMarker?.(r.id);
+      const num = document.createElement("span");
+      num.className = "toilet-pin-num";
+      num.textContent = String(i + 1); // 내 위치 기준 가까운 순 (1이 가장 가까움)
+      pin.appendChild(num);
       const ov = new window.kakao.maps.CustomOverlay({
         position: new window.kakao.maps.LatLng(r.lat, r.lng),
         content: pin,
-        map: mapRef.current,
+        map,
         yAnchor: 1,
         zIndex: r.id === selectedId ? 9 : 5,
       });
       markersRef.current.push(ov);
-    }
+    });
   }, [restrooms, selectedId, onSelectMarker]);
 
   return <div ref={containerRef} className="map-view" />;

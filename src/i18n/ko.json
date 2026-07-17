@@ -11,12 +11,13 @@
     "timeout": "위치 확인이 지연됩니다. 서울시청 기준으로 표시합니다."
   },
   "nearest": {
-    "badge": "최단",
     "startNavi": "안내 시작",
     "call": "전화",
     "empty": "주변에 등록된 화장실이 없습니다.",
     "meters": "m",
-    "kilometers": "km"
+    "kilometers": "km",
+    "prevPage": "이전 화장실 3곳",
+    "nextPage": "다음 화장실 3곳"
   },
   "data": {
     "loading": "주변 화장실 불러오는 중…",

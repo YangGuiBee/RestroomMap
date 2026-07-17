@@ -178,8 +178,7 @@ code {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
   cursor: pointer;
 }
-.toilet-pin::before {
-  content: "화";
+.toilet-pin-num {
   transform: rotate(45deg);
 }
 .toilet-pin.selected {
@@ -208,10 +207,32 @@ code {
 }
 
 /* 가까운 화장실 카드 스트립 — 3곳이 스크롤 없이 한 화면에 보이도록 균등폭 */
+.cards-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+}
+
 .cards {
   display: flex;
+  flex: 1;
+  min-width: 0;
   gap: 8px;
-  padding: 12px 16px;
+}
+
+.cards-nav {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 44px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--brand);
+  background: var(--muted-bg);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .card {
@@ -241,11 +262,14 @@ code {
   width: 20px;
   height: 20px;
   margin-top: 1px;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 800;
   color: #fff;
-  background: #d32f2f;
+  background: var(--brand);
   border-radius: 50%;
+}
+.badge-dot.rank-1 {
+  background: #d32f2f;
 }
 
 .card-name {

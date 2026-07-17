@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import MapView from "./components/MapView";
 import BottomCards from "./components/BottomCards";
 import DetailSheet from "./components/DetailSheet";
@@ -16,9 +16,20 @@ export default function App() {
   const geo = useGeolocation();
   const { list, status } = useNearbyRestrooms(geo.loading ? null : geo.coords);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [cardPage, setCardPage] = useState(0);
+
+  // 위치가 바뀌어 목록이 새로 갱신되면 카드 페이지도 처음으로 되돌림
+  useEffect(() => {
+    setCardPage(0);
+  }, [list]);
 
   const markers = useMemo(() => list.slice(0, MAX_MARKERS), [list]);
-  const cards = useMemo(() => list.slice(0, MAX_CARDS), [list]);
+  const cards = useMemo(
+    () => list.slice(cardPage * MAX_CARDS, cardPage * MAX_CARDS + MAX_CARDS),
+    [list, cardPage]
+  );
+  const hasPrevCards = cardPage > 0;
+  const hasNextCards = (cardPage + 1) * MAX_CARDS < list.length;
   const selected = useMemo(
     () => list.find((r) => r.id === selectedId) ?? null,
     [list, selectedId]
@@ -86,9 +97,14 @@ export default function App() {
         {status === "ready" && (
           <BottomCards
             items={cards}
+            rankOffset={cardPage * MAX_CARDS}
             selectedId={selectedId}
             onSelect={setSelectedId}
             origin={origin}
+            hasPrev={hasPrevCards}
+            hasNext={hasNextCards}
+            onPrev={() => setCardPage((p) => p - 1)}
+            onNext={() => setCardPage((p) => p + 1)}
           />
         )}
         <div className="safety-bar">
