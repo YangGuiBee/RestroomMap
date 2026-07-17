@@ -31,5 +31,5 @@
 - [x] Phase 0 스캐폴딩 / Phase 2 지도+현재위치 / Phase 3 주변검색+리스트
 - [x] Phase 4 상세+내비 딥링크
 - [x] Phase 5 PWA오프라인·다크모드
-- [x] Phase 6 배포 (https://restroommap.vercel.app) — 실차 GPS·딥링크 테스트만 남음
+- [x] Phase 6 배포 (https://wc-sos.vercel.app) — 실차 GPS·딥링크 테스트만 남음
 - 앱 지도 표시엔 `.env`의 VITE_KAKAO_JS_KEY 필요 (플랫폼 키 > JavaScript 키)
