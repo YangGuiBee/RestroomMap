@@ -315,6 +315,9 @@ code {
 .toilet-pin-num {
   transform: rotate(45deg);
 }
+.toilet-pin.closed {
+  background: #d32f2f;
+}
 .toilet-pin.selected {
   width: 36px;
   height: 36px;
@@ -401,6 +404,9 @@ code {
   color: #fff;
   background: var(--brand);
   border-radius: 50%;
+}
+.badge-dot.closed {
+  background: #d32f2f;
 }
 
 .card-name {

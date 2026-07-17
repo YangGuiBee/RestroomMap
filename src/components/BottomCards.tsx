@@ -53,7 +53,7 @@ export default function BottomCards({
               onClick={() => onSelect(r.id)}
             >
               <div className="card-name">
-                <span className="badge-dot">{rank}</span>
+                <span className={`badge-dot${closed ? " closed" : ""}`}>{rank}</span>
                 <span className="card-name-text">{r.name}</span>
               </div>
               <div className="card-meta">

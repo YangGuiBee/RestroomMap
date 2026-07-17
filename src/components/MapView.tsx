@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import type { Coords, RestroomWithDistance } from "../types";
+import { getAvailability } from "../lib/openHours";
 
 const MAX_AUTO_LEVEL = 6; // 자동 맞춤 시 이보다 더 축소되지 않도록 하는 상한 (숫자가 클수록 축소)
 const MIN_RADIUS_METERS = 500; // 기본 화면은 최소 이 반경만큼은 보이도록 시작
@@ -160,8 +161,10 @@ export default function MapView({
           ? new window.kakao.maps.LatLng(r.lat, r.lng)
           : projection.coordsFromPoint(point);
 
+      const closed = getAvailability(r.openHours) === "closed";
       const pin = document.createElement("div");
-      pin.className = "toilet-pin" + (r.id === selectedId ? " selected" : "");
+      pin.className =
+        "toilet-pin" + (closed ? " closed" : "") + (r.id === selectedId ? " selected" : "");
       pin.onclick = () => onSelectMarker?.(r.id);
       const num = document.createElement("span");
       num.className = "toilet-pin-num";

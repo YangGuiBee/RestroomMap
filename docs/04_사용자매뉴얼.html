@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>화장실SOS 사용자 매뉴얼</title>
+<style>
+  :root {
+    --brand: #1565c0;
+    --brand-dark: #0d47a1;
+    --text: #1a1a1a;
+    --muted: #607d8b;
+    --bg: #ffffff;
+    --card: #f5f7fa;
+    --border: #e0e0e0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 32px 20px 80px; }
+  header.doc-header {
+    background: var(--brand);
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  header.doc-header h1 { margin: 0 0 8px; font-size: 28px; }
+  header.doc-header p { margin: 0; opacity: 0.9; }
+  .meta-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+  .meta-table td { border: 1px solid var(--border); padding: 8px 12px; }
+  .meta-table td:first-child { background: var(--card); font-weight: 700; width: 140px; }
+  h2 {
+    margin-top: 48px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--brand);
+    font-size: 22px;
+  }
+  h3 { margin-top: 28px; font-size: 17px; color: var(--brand-dark); }
+  .step-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 12px 0;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px; height: 26px;
+    background: var(--brand);
+    color: #fff;
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 13px;
+    margin-right: 8px;
+  }
+  .badge-red {
+    display: inline-flex; align-items:center; justify-content:center;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #d32f2f; color:#fff; font-size: 11px; font-weight: 800;
+  }
+  .btn-sample {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .btn-blue { background: var(--brand); }
+  .btn-red { background: #d32f2f; }
+  table.field-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  table.field-table th, table.field-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; }
+  table.field-table th { background: var(--card); }
+  .faq dt { font-weight: 800; margin-top: 18px; color: var(--brand-dark); }
+  .faq dd { margin: 6px 0 0; color: var(--text); }
+  .note {
+    background: #fff3cd;
+    border-left: 4px solid #e6a817;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  footer.doc-footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  code { background: #eceff1; padding: 1px 6px; border-radius: 4px; font-size: 0.92em; }
+</style>
+</head>
+<body>
+
+<header class="doc-header">
+  <h1>🚻 화장실SOS 사용자 매뉴얼</h1>
+  <p>운전 중 급할 때, 가장 가까운 공공화장실을 3초 안에</p>
+</header>
+
+<div class="wrap">
+
+<table class="meta-table">
+  <tr><td>문서버전</td><td>v1.0</td></tr>
+  <tr><td>작성일</td><td>2026-07-17</td></tr>
+  <tr><td>서비스 URL</td><td><a href="https://wc-sos.vercel.app" target="_blank">https://wc-sos.vercel.app</a></td></tr>
+</table>
+
+<h2>1. 서비스 소개</h2>
+<p>화장실SOS는 운전 중 급하게 화장실이 필요한 상황을 위한 모바일 웹앱(PWA)입니다. 앱을 실행하면 현재 위치를 기준으로 가장 가까운 공공화장실을 즉시 보여주고, 버튼 한 번으로 내비게이션 안내까지 연결됩니다. 별도 설치 없이 브라우저에서 바로 사용할 수 있습니다.</p>
+
+<h2>2. 시작하기</h2>
+<h3>2.1 브라우저에서 바로 사용</h3>
+<div class="step-card"><span class="step-num">1</span>스마트폰/차량 브라우저에서 <code>wc-sos.vercel.app</code> 접속</div>
+<div class="step-card"><span class="step-num">2</span>위치 권한 허용 팝업이 뜨면 <b>"허용"</b> 선택 (거부하면 서울시청 기준으로 대체 표시됩니다)</div>
+
+<h3>2.2 홈 화면에 앱처럼 설치 (선택)</h3>
+<p>브라우저 메뉴에서 "홈 화면에 추가"를 선택하면 아이콘이 생성되어, 매번 주소를 입력하지 않고 앱처럼 바로 실행할 수 있습니다. 오프라인 상태에서도 마지막으로 조회한 지역의 화장실 목록은 확인 가능합니다.</p>
+
+<h2>3. 화면 구성</h2>
+<h3>3.1 상단 바</h3>
+<ul>
+  <li><b>◎ 내 위치</b> — 현재 GPS 위치로 재검색</li>
+  <li><b>🔍 특정위치</b> — 지금 있는 곳이 아닌 다른 장소(목적지 등) 주변을 미리 검색</li>
+</ul>
+
+<h3>3.2 지도 영역</h3>
+<p>주황색 점은 검색한 특정위치, 파란색 점은 내 실제 위치입니다. 화장실 마커에는 가까운 순서대로 번호가 매겨져 있으며, 번호를 탭하면 상세정보가 열립니다.</p>
+
+<h3>3.3 하단 카드</h3>
+<p>가까운 화장실이 카드 형태로 나열됩니다. 첫 번째 카드는 <span class="badge-red">1</span> 빨간 배지로 강조됩니다.</p>
+<table class="field-table">
+  <tr><th>버튼</th><th>동작</th></tr>
+  <tr><td><span class="btn-sample btn-blue">안내 시작</span></td><td>카카오내비 → 티맵 → 카카오맵 웹 순서로 자동 연결되어 길안내 시작</td></tr>
+  <tr><td><span class="btn-sample btn-red">이용불가</span></td><td>현재 시각 기준 운영시간이 아닌 것으로 판단된 곳 (그래도 탭하면 안내는 시작됩니다 — 정보가 틀렸을 수 있으니 참고용)</td></tr>
+  <tr><td>‹‹ / ››</td><td>화면에 다 안 보이는 다음/이전 순위 화장실로 페이지 전환</td></tr>
+</table>
+
+<h2>4. 주요 기능</h2>
+
+<h3>4.1 상세정보 보기</h3>
+<p>지도 위 번호 마커나 하단 카드를 탭하면 아래 정보가 담긴 화면이 아래에서 올라옵니다.</p>
+<ul>
+  <li>개방시간(요일별 다른 경우 포함)</li>
+  <li>남/녀 변기수</li>
+  <li>장애인용 화장실 여부</li>
+  <li>기저귀교환대 여부</li>
+  <li>비상벨/CCTV 설치 여부</li>
+  <li>관리기관 전화번호 — 탭하면 바로 전화 연결</li>
+</ul>
+
+<h3>4.2 특정위치 검색</h3>
+<p>지금 있는 곳이 아니라 앞으로 갈 장소(예: "강남역") 주변 화장실을 미리 확인하고 싶을 때 사용합니다. 검색 후에도 <b>"안내 시작"은 항상 지금 내 실제 위치에서 출발</b>합니다.</p>
+
+<h3>4.3 다크모드</h3>
+<p>별도 설정 없이 기기의 다크모드 설정을 자동으로 따라갑니다(야간 운전 시 눈부심 완화).</p>
+
+<h2>5. 자주 묻는 질문</h2>
+<dl class="faq">
+  <dt>Q. 위치 권한을 거부했는데 어떻게 되나요?</dt>
+  <dd>A. 서울시청을 기준으로 화장실 목록이 표시되고, 상단에 안내 배너가 뜹니다. "내 위치" 버튼을 다시 눌러 권한을 허용하면 정상 동작합니다.</dd>
+  <dt>Q. "이용불가"인데 정말 문을 닫았나요?</dt>
+  <dd>A. 공공데이터의 개방시간 텍스트를 자동으로 해석한 결과라 실제와 다를 수 있습니다. 확실하지 않은 경우는 아예 표시하지 않으므로, 표시된 "이용불가"는 어느 정도 근거가 있는 판단입니다. 그래도 정확도가 100%는 아니니 참고용으로 봐주세요.</dd>
+  <dt>Q. 카카오내비/티맵이 없으면 어떻게 되나요?</dt>
+  <dd>A. 자동으로 카카오맵 웹 길찾기 화면으로 넘어갑니다. 별도 조작이 필요 없습니다.</dd>
+  <dt>Q. 오프라인에서도 되나요?</dt>
+  <dd>A. 한 번 접속했던 지역이라면, 인터넷이 안 되는 상황에서도 마지막으로 불러온 화장실 목록은 볼 수 있습니다(경로 안내는 인터넷 필요).</dd>
+</dl>
+
+<div class="note">
+  ⚠️ 운전 중에는 반드시 <b>정차 후</b> 화면을 조작해 주세요.
+</div>
+
+<footer class="doc-footer">
+  화장실SOS 사용자 매뉴얼 v1.0 · 2026-07-17
+</footer>
+
+</div>
+</body>
+</html>

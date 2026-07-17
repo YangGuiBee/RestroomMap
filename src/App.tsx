@@ -161,7 +161,8 @@ export default function App() {
           />
         )}
         <div className="safety-bar">
-          {t.safety.notice} ({t.safety.dataUpdated}: {dataMeta.updatedAt})
+          {t.safety.notice}
+          <br />({t.safety.dataUpdated}: {dataMeta.updatedAt})
         </div>
       </footer>
 

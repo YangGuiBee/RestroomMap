@@ -31,5 +31,10 @@
 - [x] Phase 0 스캐폴딩 / Phase 2 지도+현재위치 / Phase 3 주변검색+리스트
 - [x] Phase 4 상세+내비 딥링크
 - [x] Phase 5 PWA오프라인·다크모드
-- [x] Phase 6 배포 (https://wc-sos.vercel.app) — 실차 GPS·딥링크 테스트만 남음
+- [x] Phase 6 배포 (https://wc-sos.vercel.app)
+- [x] **버전1 마무리**: 산출물 정리 완료(`docs/` 폴더). 실차 GPS·딥링크 테스트만 남음
 - 앱 지도 표시엔 `.env`의 VITE_KAKAO_JS_KEY 필요 (플랫폼 키 > JavaScript 키)
+
+## 정식 산출물 (docs/)
+`01_아키텍처설계서` `02_프로그램목록` `03_데이터베이스설계서` `04_사용자매뉴얼.html`
+`04_운영자매뉴얼.html` `05_버전1개발일지` `06_버전2-5_개발계획서` `07_향후계획`
