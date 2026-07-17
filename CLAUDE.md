@@ -1,4 +1,4 @@
-# 화장실맵 (RestroomMap)
+# 화장실SOS (RestroomMap)
 
 긴급 상황에서 가장 가까운 공공화장실을 찾는 모바일 PWA.
 

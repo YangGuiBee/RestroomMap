@@ -10,8 +10,8 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.png", "icons/icon-192.png", "icons/icon-512.png"],
       manifest: {
-        name: "화장실맵",
-        short_name: "화장실맵",
+        name: "화장실SOS",
+        short_name: "화장실SOS",
         description: "가장 가까운 공공화장실을 3초 안에",
         theme_color: "#1565c0",
         background_color: "#ffffff",
