@@ -2,6 +2,19 @@ import { useEffect, useRef } from "react";
 import type { Coords, RestroomWithDistance } from "../types";
 
 const MAX_AUTO_LEVEL = 6; // 자동 맞춤 시 이보다 더 축소되지 않도록 하는 상한 (숫자가 클수록 축소)
+const MIN_RADIUS_METERS = 500; // 기본 화면은 최소 이 반경만큼은 보이도록 시작
+
+// center를 기준으로 반경 meters를 담는 사각 범위를 bounds에 추가
+function extendBoundsByRadius(
+  bounds: kakao.maps.LatLngBounds,
+  center: Coords,
+  meters: number
+) {
+  const latOffset = meters / 111320;
+  const lngOffset = meters / (111320 * Math.cos((center.lat * Math.PI) / 180));
+  bounds.extend(new window.kakao.maps.LatLng(center.lat + latOffset, center.lng + lngOffset));
+  bounds.extend(new window.kakao.maps.LatLng(center.lat - latOffset, center.lng - lngOffset));
+}
 
 interface Props {
   center: Coords;
@@ -55,7 +68,7 @@ export default function MapView({
       return;
     }
     const bounds = new window.kakao.maps.LatLngBounds();
-    bounds.extend(new window.kakao.maps.LatLng(center.lat, center.lng));
+    extendBoundsByRadius(bounds, center, MIN_RADIUS_METERS);
     restrooms.forEach((r) => bounds.extend(new window.kakao.maps.LatLng(r.lat, r.lng)));
     map.setBounds(bounds);
     // 마커가 멀리까지 퍼져있으면 setBounds가 너무 축소해버려서, 정작 가까운(카드에 뜨는)
