@@ -11,7 +11,6 @@ import type { Coords } from "./types";
 import t from "./i18n/ko.json";
 import dataMeta from "./data-meta.json";
 
-const MAX_MARKERS = 10; // 지도에 표시할 최대 마커 (가까운 순)
 const MAX_CARDS_MOBILE = 3; // 하단 카드 — 모바일은 한 화면에 3개가 적당
 const MAX_CARDS_DESKTOP = 6; // 데스크톱은 화면이 넓어 6개까지
 
@@ -51,7 +50,6 @@ export default function App() {
     geo.refresh();
   };
 
-  const markers = useMemo(() => list.slice(0, MAX_MARKERS), [list]);
   const cards = useMemo(
     () => list.slice(cardPage * MAX_CARDS, cardPage * MAX_CARDS + MAX_CARDS),
     [list, cardPage]
@@ -121,7 +119,8 @@ export default function App() {
             center={center}
             myLocation={origin}
             searchLocation={searchCenter}
-            restrooms={markers}
+            restrooms={cards}
+            rankOffset={cardPage * MAX_CARDS}
             selectedId={selectedId}
             onSelectMarker={setSelectedId}
           />

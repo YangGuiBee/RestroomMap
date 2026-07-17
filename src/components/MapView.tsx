@@ -20,18 +20,22 @@ interface Props {
   center: Coords;
   myLocation: Coords | null;
   searchLocation?: Coords | null;
-  restrooms?: RestroomWithDistance[];
+  restrooms?: RestroomWithDistance[]; // 현재 카드 페이지에 보이는 화장실만 (전체 목록 아님)
+  rankOffset?: number; // 배지 번호 계산용 — 현재 페이지 시작 인덱스 (0, 6, 12...)
   selectedId?: string | null;
   onSelectMarker?: (id: string) => void;
 }
 
 // 카카오맵 렌더링 + 내 위치 마커 + 검색 위치 마커 + 주변 화장실 마커.
+// 지도는 항상 "지금 카드에 보이는 곳들"만 기준으로 확대/축소를 맞춘다 — 처음엔 가까운
+// 범위로 좁게 시작하고, 다음 페이지(>>)로 넘어가면 그 범위에 맞춰 다시 조정된다.
 // 지도 SDK는 상위(App)에서 로드 완료를 보장한 뒤 마운트한다.
 export default function MapView({
   center,
   myLocation,
   searchLocation = null,
   restrooms = [],
+  rankOffset = 0,
   selectedId = null,
   onSelectMarker,
 }: Props) {
@@ -158,7 +162,7 @@ export default function MapView({
       pin.onclick = () => onSelectMarker?.(r.id);
       const num = document.createElement("span");
       num.className = "toilet-pin-num";
-      num.textContent = String(i + 1); // 내 위치 기준 가까운 순 (1이 가장 가까움)
+      num.textContent = String(rankOffset + i + 1); // 내 위치 기준 가까운 순 (1이 가장 가까움)
       pin.appendChild(num);
       const ov = new window.kakao.maps.CustomOverlay({
         position: latlng,
@@ -169,7 +173,7 @@ export default function MapView({
       ov.setMap(map);
       markersRef.current.push(ov);
     });
-  }, [restrooms, selectedId, onSelectMarker]);
+  }, [restrooms, rankOffset, selectedId, onSelectMarker]);
 
   return <div ref={containerRef} className="map-view" />;
 }
