@@ -34,7 +34,7 @@
     "missing": "화장실 데이터가 없습니다. 터미널에서 `npm run tiles`를 실행하세요."
   },
   "safety": {
-    "notice": "운전 중에는 정차 후 조작하세요.",
+    "notice": "© 2026 guibee1004@gmail.com. All rights reserved.",
     "dataUpdated": "지도업데이트"
   },
   "detail": {
