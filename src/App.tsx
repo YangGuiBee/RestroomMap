@@ -10,7 +10,7 @@ import type { Coords } from "./types";
 import t from "./i18n/ko.json";
 import dataMeta from "./data-meta.json";
 
-const MAX_MARKERS = 20; // 지도에 표시할 최대 마커 (가까운 순)
+const MAX_MARKERS = 10; // 지도에 표시할 최대 마커 (가까운 순)
 const MAX_CARDS = 3; // 하단 카드 (가장 가까운 3곳)
 
 export default function App() {
