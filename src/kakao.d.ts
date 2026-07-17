@@ -61,6 +61,30 @@ declare global {
     namespace event {
       function addListener(target: object, type: string, handler: (...args: unknown[]) => void): void;
     }
+
+    namespace services {
+      // 장소/주소 검색 (SDK 로드 시 &libraries=services 필요, useKakaoLoader.ts에서 이미 포함)
+      enum Status {
+        OK = "OK",
+        ZERO_RESULT = "ZERO_RESULT",
+        ERROR = "ERROR",
+      }
+
+      interface PlacesSearchResultItem {
+        place_name: string;
+        address_name: string;
+        road_address_name: string;
+        x: string; // lng (문자열로 내려옴)
+        y: string; // lat
+      }
+
+      class Places {
+        keywordSearch(
+          keyword: string,
+          callback: (data: PlacesSearchResultItem[], status: Status) => void
+        ): void;
+      }
+    }
   }
 }
 

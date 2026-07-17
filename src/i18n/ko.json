@@ -8,7 +8,15 @@
     "myLocation": "내 위치",
     "denied": "위치 권한이 거부되었습니다. 서울시청 기준으로 표시합니다.",
     "unavailable": "위치를 가져올 수 없어 서울시청 기준으로 표시합니다.",
-    "timeout": "위치 확인이 지연됩니다. 서울시청 기준으로 표시합니다."
+    "timeout": "위치 확인이 지연됩니다. 서울시청 기준으로 표시합니다.",
+    "specificLocation": "특정위치",
+    "searchPlaceholder": "장소, 주소 검색",
+    "search": "검색",
+    "searching": "검색 중…",
+    "searchEmpty": "검색 결과가 없습니다.",
+    "searchError": "검색 중 오류가 발생했습니다.",
+    "searchActive": "검색 위치",
+    "searchClear": "검색 위치 해제"
   },
   "nearest": {
     "startNavi": "안내 시작",

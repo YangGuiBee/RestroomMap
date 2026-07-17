@@ -87,15 +87,21 @@ body {
   border-radius: 8px;
 }
 
+.top-bar-actions {
+  display: flex;
+  gap: 6px;
+}
+
 .my-loc-btn {
-  min-height: 44px;
-  padding: 0 16px;
-  font-size: 16px;
+  min-height: 40px;
+  padding: 0 10px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--brand);
   background: #fff;
   border: none;
-  border-radius: 22px;
+  border-radius: 20px;
+  white-space: nowrap;
   cursor: pointer;
 }
 
@@ -107,6 +113,123 @@ body {
   color: var(--banner-text);
   background: var(--banner-bg);
   text-align: center;
+}
+
+.search-active-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--surface-alt);
+  color: var(--accent-text);
+}
+
+.search-clear-btn {
+  width: 22px;
+  height: 22px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--accent-text);
+  background: var(--bg);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* 특정위치 검색 패널 */
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: var(--overlay);
+}
+
+.search-panel {
+  background: var(--bg);
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.search-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 12px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--muted-bg);
+  border: 2px solid transparent;
+  border-radius: 10px;
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--brand);
+}
+
+.search-go-btn {
+  flex: 0 0 auto;
+  min-width: 56px;
+  min-height: 44px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+  background: var(--brand);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.search-close-btn {
+  flex: 0 0 auto;
+  width: 44px;
+  min-height: 44px;
+  font-size: 16px;
+  color: var(--muted-text);
+  background: var(--muted-bg);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.search-status {
+  padding: 14px 4px;
+  font-size: 14px;
+  color: var(--muted-text);
+  text-align: center;
+}
+
+.search-results {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  max-height: 45vh;
+  overflow-y: auto;
+}
+.search-results li {
+  padding: 10px 8px;
+  border-top: 1px solid var(--border);
+  cursor: pointer;
+}
+.search-results li:first-child {
+  border-top: none;
+}
+.search-result-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+}
+.search-result-addr {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--muted-text);
 }
 
 /* 지도 영역 */
@@ -151,14 +274,25 @@ code {
   font-size: 0.9em;
 }
 
-/* 내 위치 파란 점 */
+/* 내 위치 점 (특정위치 마커와 색 통일 — 주황) */
 .my-location-dot {
   width: 18px;
   height: 18px;
-  background: #1e88e5;
+  background: #f57c00;
   border: 3px solid #fff;
   border-radius: 50%;
-  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.3);
+  box-shadow: 0 0 0 3px rgba(245, 124, 0, 0.3);
+}
+
+/* 특정위치 검색 마커 (주황 핀) */
+.search-pin {
+  width: 26px;
+  height: 26px;
+  background: #f57c00;
+  border: 3px solid #fff;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
 }
 
 /* 화장실 마커 핀 */
