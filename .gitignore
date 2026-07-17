@@ -1,0 +1,30 @@
+# dependencies
+node_modules/
+
+# build
+dist/
+dist-ssr/
+*.local
+
+# env (절대 커밋 금지 — API 키 포함)
+.env
+
+# 대용량 원본/중간 데이터 (필요 시 별도 보관)
+공중화장실정보.csv
+data/공중화장실정보_utf8.csv
+data/geocoded.jsonl
+data/geocode_failed.jsonl
+
+# 참고용 원본 문서 (앱 실행에 불필요)
+*.hwpx
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
