@@ -16,7 +16,7 @@ interface Props {
   onNext: () => void;
 }
 
-// 하단 가까운 화장실 카드 스트립. 순위 1위(전체 기준)만 빨간 배지로 강조.
+// 하단 가까운 화장실 카드 스트립. 순위 1위(전체 기준)는 카드 배경으로만 강조.
 // 3곳씩 페이지 전환(<</>>) — 데이터가 4곳 이상일 때만 화살표 노출.
 export default function BottomCards({
   items,
@@ -53,7 +53,7 @@ export default function BottomCards({
               onClick={() => onSelect(r.id)}
             >
               <div className="card-name">
-                <span className={`badge-dot${rank === 1 ? " rank-1" : ""}`}>{rank}</span>
+                <span className="badge-dot">{rank}</span>
                 <span className="card-name-text">{r.name}</span>
               </div>
               <div className="card-meta">

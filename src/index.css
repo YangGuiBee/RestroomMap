@@ -402,9 +402,6 @@ code {
   background: var(--brand);
   border-radius: 50%;
 }
-.badge-dot.rank-1 {
-  background: #d32f2f;
-}
 
 .card-name {
   display: flex;
